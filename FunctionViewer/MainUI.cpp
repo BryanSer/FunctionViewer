@@ -1,4 +1,5 @@
 #include "MainUI.h"
+
 using namespace FunctionViewer;
 int main(array<String ^> ^args) {
 	Application::EnableVisualStyles();
