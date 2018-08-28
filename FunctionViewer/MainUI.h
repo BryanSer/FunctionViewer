@@ -52,6 +52,7 @@ namespace FunctionViewer {
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem4;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem5;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem6;
+	private: System::Windows::Forms::ToolStripMenuItem^  设置字体颜色ToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -85,6 +86,7 @@ namespace FunctionViewer {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->设置字体颜色ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -128,9 +130,9 @@ namespace FunctionViewer {
 			// 
 			// 风格ToolStripMenuItem
 			// 
-			this->风格ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->风格ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->设置背景颜色ToolStripMenuItem,
-					this->设置坐标轴颜色ToolStripMenuItem, this->设置曲线颜色ToolStripMenuItem, this->曲线宽度ToolStripMenuItem
+					this->设置坐标轴颜色ToolStripMenuItem, this->设置曲线颜色ToolStripMenuItem, this->设置字体颜色ToolStripMenuItem, this->曲线宽度ToolStripMenuItem
 			});
 			this->风格ToolStripMenuItem->Name = L"风格ToolStripMenuItem";
 			this->风格ToolStripMenuItem->Size = System::Drawing::Size(49, 24);
@@ -139,21 +141,21 @@ namespace FunctionViewer {
 			// 设置背景颜色ToolStripMenuItem
 			// 
 			this->设置背景颜色ToolStripMenuItem->Name = L"设置背景颜色ToolStripMenuItem";
-			this->设置背景颜色ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->设置背景颜色ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
 			this->设置背景颜色ToolStripMenuItem->Text = L"设置背景颜色";
 			this->设置背景颜色ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::设置背景颜色ToolStripMenuItem_Click);
 			// 
 			// 设置坐标轴颜色ToolStripMenuItem
 			// 
 			this->设置坐标轴颜色ToolStripMenuItem->Name = L"设置坐标轴颜色ToolStripMenuItem";
-			this->设置坐标轴颜色ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->设置坐标轴颜色ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
 			this->设置坐标轴颜色ToolStripMenuItem->Text = L"设置坐标轴颜色";
 			this->设置坐标轴颜色ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::设置坐标轴颜色ToolStripMenuItem_Click);
 			// 
 			// 设置曲线颜色ToolStripMenuItem
 			// 
 			this->设置曲线颜色ToolStripMenuItem->Name = L"设置曲线颜色ToolStripMenuItem";
-			this->设置曲线颜色ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->设置曲线颜色ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
 			this->设置曲线颜色ToolStripMenuItem->Text = L"设置曲线颜色";
 			this->设置曲线颜色ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::设置曲线颜色ToolStripMenuItem_Click);
 			// 
@@ -164,7 +166,7 @@ namespace FunctionViewer {
 					this->toolStripMenuItem3, this->toolStripMenuItem4, this->toolStripMenuItem5, this->toolStripMenuItem6
 			});
 			this->曲线宽度ToolStripMenuItem->Name = L"曲线宽度ToolStripMenuItem";
-			this->曲线宽度ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->曲线宽度ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
 			this->曲线宽度ToolStripMenuItem->Text = L"曲线宽度";
 			// 
 			// toolStripMenuItem2
@@ -172,35 +174,35 @@ namespace FunctionViewer {
 			this->toolStripMenuItem2->Checked = true;
 			this->toolStripMenuItem2->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
-			this->toolStripMenuItem2->Size = System::Drawing::Size(90, 24);
+			this->toolStripMenuItem2->Size = System::Drawing::Size(202, 24);
 			this->toolStripMenuItem2->Text = L"1";
 			this->toolStripMenuItem2->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem2_Click);
 			// 
 			// toolStripMenuItem3
 			// 
 			this->toolStripMenuItem3->Name = L"toolStripMenuItem3";
-			this->toolStripMenuItem3->Size = System::Drawing::Size(90, 24);
+			this->toolStripMenuItem3->Size = System::Drawing::Size(202, 24);
 			this->toolStripMenuItem3->Text = L"2";
 			this->toolStripMenuItem3->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem3_Click);
 			// 
 			// toolStripMenuItem4
 			// 
 			this->toolStripMenuItem4->Name = L"toolStripMenuItem4";
-			this->toolStripMenuItem4->Size = System::Drawing::Size(90, 24);
+			this->toolStripMenuItem4->Size = System::Drawing::Size(202, 24);
 			this->toolStripMenuItem4->Text = L"3";
 			this->toolStripMenuItem4->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem4_Click);
 			// 
 			// toolStripMenuItem5
 			// 
 			this->toolStripMenuItem5->Name = L"toolStripMenuItem5";
-			this->toolStripMenuItem5->Size = System::Drawing::Size(90, 24);
+			this->toolStripMenuItem5->Size = System::Drawing::Size(202, 24);
 			this->toolStripMenuItem5->Text = L"4";
 			this->toolStripMenuItem5->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem5_Click);
 			// 
 			// toolStripMenuItem6
 			// 
 			this->toolStripMenuItem6->Name = L"toolStripMenuItem6";
-			this->toolStripMenuItem6->Size = System::Drawing::Size(90, 24);
+			this->toolStripMenuItem6->Size = System::Drawing::Size(202, 24);
 			this->toolStripMenuItem6->Text = L"5";
 			this->toolStripMenuItem6->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem6_Click);
 			// 
@@ -264,6 +266,13 @@ namespace FunctionViewer {
 			this->button1->Text = L"绘制";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MainUI::button1_Click);
+			// 
+			// 设置字体颜色ToolStripMenuItem
+			// 
+			this->设置字体颜色ToolStripMenuItem->Name = L"设置字体颜色ToolStripMenuItem";
+			this->设置字体颜色ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
+			this->设置字体颜色ToolStripMenuItem->Text = L"设置字体颜色";
+			this->设置字体颜色ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::设置字体颜色ToolStripMenuItem_Click);
 			// 
 			// MainUI
 			// 
@@ -352,6 +361,12 @@ namespace FunctionViewer {
 			style->LineColor = cd->Color;
 			delete cd;
 		}
+		System::Void 设置字体颜色ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			ColorDialog ^ cd = gcnew ColorDialog();
+			cd->ShowDialog();
+			style->FontColor = cd->Color;
+			delete cd;
+		}
 		System::Void toolStripMenuItem2_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem2->Checked = true;
@@ -403,6 +418,9 @@ namespace FunctionViewer {
 				Point p = e->Location;
 				dy = p.Y - LastPoint->Y;
 				info->Zoom += dy * 0.01;
+				if (info->Zoom < 0.01) {
+					info->Zoom = 0.01;
+				}
 				LastPoint = %p;
 				drawGraphics();
 			}
@@ -434,17 +452,84 @@ namespace FunctionViewer {
 
 		void drawAxis(Graphics ^g) {
 			float zoom = info->Zoom;
-			float displayH = 2 * (getCenter()->Y) / (zoom * 50);
+			auto pbox = this->pictureBox1;
+			float displayH = pbox->Height / (zoom * 50);
 			Pen ^p = gcnew Pen(this->style->AxisColor, 3);
-			if (info->Location->Location_Y * (info->Location->Location_Y - displayH) < 0) {
-				g->DrawLine(p, 0.0f, info->Location->Location_Y * zoom * 50, (float)this->pictureBox1->Width, info->Location->Location_Y * zoom * 50);
+			SolidBrush ^arrbsh = gcnew SolidBrush(this->style->AxisColor);
+			Point ^center = this->info->toPoint(gcnew FPoint(0, 0));
+			//if (info->Location->Location_Y * (info->Location->Location_Y - displayH) < 0) {
+				//X轴
+				g->DrawLine(p, 0, center->Y, this->pictureBox1->Width, center->Y);
+				g->FillClosedCurve(arrbsh, getArrowPoint_Right(Point((float)this->pictureBox1->Width, center->Y)));
+			//}
+
+			float displayW = pbox->Width / (zoom * 50);
+			//if (info->Location->Location_X * (info->Location->Location_X + displayW) < 0) {
+				//Y轴
+				g->DrawLine(p, center->X, 0, center->X, this->pictureBox1->Height);
+				g->FillClosedCurve(arrbsh, getArrowPoint_Top(Point(center->X, 0)));
+			//}
+			//绘制原点
+			SolidBrush ^fontbsh = gcnew SolidBrush(this->style->FontColor);
+			g->DrawString("0", gcnew Drawing::Font("隶书", 15), fontbsh, Point(center->X - 18, center->Y + 4));
+			//绘制刻度
+			int interval = (0.5 / zoom) * 2;
+			if (interval < 1) {
+				interval = 1;
+			}
+			FPoint ^LU = this->info->toFPoint(gcnew Point(0, 0));
+			FPoint ^RD = this->info->toFPoint(gcnew Point(pbox->Width, pbox->Height));
+			Drawing::Font ^f = gcnew Drawing::Font("隶书", 12);
+			for (int i = LU->Location_X; i <= RD->Location_X; i += 1) {
+				if (i == 0) {
+					continue;
+				}
+				FPoint ^start = gcnew FPoint(i, 0);
+				Point ^wp = this->info->toPoint(start);
+				if (i % interval == 0) {
+					g->DrawLine(p, *wp, Point(wp->X, wp->Y - 5));
+					g->DrawString("" + i, f, fontbsh, Point(wp->X - 5 - (i < 0 ? 5 : 0), wp->Y + 6));
+				} else if (interval < 5) {
+					g->DrawLine(p, *wp, Point(wp->X, wp->Y - 3));
+				}
 			}
 
-			float displayW = 2 * (getCenter()->X) / (zoom * 50);
-			if (info->Location->Location_X * (info->Location->Location_X + displayW) < 0) {
-				g->DrawLine(p, -info->Location->Location_X * zoom * 50, 0.0f, -info->Location->Location_X * zoom * 50, (float)this->pictureBox1->Height);
+			for (int i = LU->Location_Y; i >= RD->Location_Y; i -= 1) {
+				if (i == 0) {
+					continue;
+				}
+				FPoint ^start = gcnew FPoint(0, i);
+				Point ^wp = this->info->toPoint(start);
+				if (i % interval == 0) {
+					g->DrawLine(p, *wp, Point(wp->X + 5, wp->Y));
+					int pan = 12;
+					for (int t = Math::Abs(i); t >= 10; t %= 10) {
+						pan += 12;
+					}
+					g->DrawString("" + i, f, fontbsh, Point(wp->X - 3 - pan - (i < 0 ? 12 : 0), wp->Y - 12));
+				} else if (interval < 5) {
+					g->DrawLine(p, *wp, Point(wp->X + 3, wp->Y));
+				}
 			}
+		}
 
+		array<Point>^ getArrowPoint_Right(Point t) {
+			array<Point> ^arr = gcnew array<Point>(3);
+			int x = t.X;
+			int y = t.Y;
+			arr[0] = t;
+			arr[1] = Point(x - 15, y + 5);
+			arr[2] = Point(x - 15, y - 5);
+			return arr;
+		}
+		array<Point>^ getArrowPoint_Top(Point t) {
+			array<Point> ^arr = gcnew array<Point>(3);
+			int x = t.X;
+			int y = t.Y;
+			arr[0] = t;
+			arr[1] = Point(x + 5, y + 15);
+			arr[2] = Point(x - 5, y + 15);
+			return arr;
 		}
 
 		//返回绘图中心 (UI坐标系)
@@ -452,5 +537,5 @@ namespace FunctionViewer {
 			auto p = this->pictureBox1;
 			return gcnew Point(p->Width / 2, p->Height / 2);
 		}
-};
+	};
 }

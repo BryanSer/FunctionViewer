@@ -84,13 +84,30 @@ namespace View {
 			}
 		}
 
+		Point ^toPoint(FPoint ^f) {
+			float zoom = this->Zoom;
+			float x = (-this->Location->Location_X + f->Location_X) * zoom * 50;
+			float y = (this->Location->Location_Y - f->Location_Y) * zoom * 50;
+			return gcnew Point(x, y);
+		}
+
+		FPoint ^toFPoint(Point ^p) {
+			float zoom = this->Zoom;
+			float x = p->X / (50 * zoom);
+			x += this->Location->Location_X;
+			float y = p->Y / (50 * zoom);
+			y -= this->Location->Location_Y;
+			return gcnew FPoint(x, -y);
+		}
+
 	};
 	//Í¼ÐÎÑùÊ½
 	public ref class Style {
 	private:
-		Color bgColor = Color::Black;
-		Color lineColor = Color::White;
+		Color bgColor = Color::White;
+		Color lineColor = Color::Black;
 		Color axisColor = Color::Blue;
+		Color fontColor = Color::Red;
 		int width = 1;
 
 	public:
@@ -124,6 +141,14 @@ namespace View {
 			}
 			void set(int w) {
 				this->width = w;
+			}
+		}
+		property Color FontColor {
+			Color get() {
+				return this->fontColor;
+			}
+			void set(Color c) {
+				this->fontColor = c;
 			}
 		}
 	};
