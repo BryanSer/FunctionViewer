@@ -437,6 +437,7 @@ namespace FunctionViewer {
 			style = gcnew Style();
 			Point ^center = getCenter();
 			info = gcnew ViewInfo(gcnew FPoint(-center->X / 50, center->Y / 50), CoordinateType::RightAngle);
+			//TODO
 		}
 
 		void initGraphics() {
