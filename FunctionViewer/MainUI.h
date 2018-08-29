@@ -462,6 +462,14 @@ namespace FunctionViewer {
 		void initGraphics(CoordinateType t) {
 			Point ^center = getCenter();
 			info = gcnew ViewInfo(gcnew FPoint(-center->X / 50, center->Y / 50), t);
+			switch (t) {
+			case CoordinateType::Polar:
+				this->Text = L"FunctionViewer - 极坐标模式";
+				break;
+			case CoordinateType::RightAngle:
+				this->Text = L"FunctionViewer - 直角坐标模式";
+				break;
+			}
 			this->pictureBox1->Visible = true;
 		}
 
@@ -483,8 +491,6 @@ namespace FunctionViewer {
 				g->DrawArc(p, Rectangle(center->X, center->Y - 1, 3, 3), 0, 360);
 				g->DrawLine(p, center->X, center->Y, pbox->Width, center->Y);
 				g->DrawString("○", gcnew Drawing::Font("隶书", 9), fontbsh, Point(center->X - 18, center->Y - 5));
-
-
 				return;
 			}
 
