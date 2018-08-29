@@ -2,6 +2,7 @@
 namespace View {
 	using namespace System;
 	using namespace System::Drawing;
+	using namespace System::Collections;
 	public enum class CoordinateType {
 		RightAngle, Polar
 	};
@@ -97,6 +98,7 @@ namespace View {
 			x += this->Location->Location_X;
 			float y = p->Y / (50 * zoom);
 			y -= this->Location->Location_Y;
+
 			return gcnew FPoint(x, -y);
 		}
 
@@ -153,4 +155,7 @@ namespace View {
 		}
 	};
 
+	public interface class Function {
+		ArrayList ^calcPoint();
+	};
 }
