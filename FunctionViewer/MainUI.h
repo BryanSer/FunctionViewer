@@ -503,7 +503,10 @@ namespace FunctionViewer {
 			g->FillClosedCurve(arrbsh, getArrowPoint_Top(Point(center->X, 0)));
 			int nw = 10;
 			FPoint ^LU = this->info->toFPoint(gcnew Point(0, 0));
-			for (int t = LU->Location_Y; t >= 10; t /= 10) {
+			for (int t = Math::Abs(LU->Location_Y); t >= 10; t /= 10) {
+				nw += 10;
+			}
+			if (LU->Location_Y < 0) {
 				nw += 10;
 			}
 			g->DrawString("y", gcnew Drawing::Font("Á¥Êé", 12), fontbsh, Point(center->X - 20 - nw, 5));
