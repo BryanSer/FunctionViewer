@@ -1,8 +1,11 @@
 #pragma once
+#include <cliext/stack>
 namespace View {
+	using namespace cliext;
 	using namespace System;
 	using namespace System::Drawing;
-	using namespace System::Collections;
+	using namespace System::Collections; 
+	using namespace System::Text::RegularExpressions;
 	public enum class CoordinateType {
 		RightAngle, Polar
 	};
@@ -59,7 +62,7 @@ namespace View {
 			this->location = loc;
 			this->type = type;
 		}
-		property FPoint ^Location{
+		property FPoint ^Location {
 			FPoint ^get() {
 				return this->location;
 			}
@@ -157,5 +160,33 @@ namespace View {
 
 	public interface class Function {
 		ArrayList ^calcPoint();
+	};
+
+	public ref class Expression {
+	private:
+		array<int> ^operatPriority = gcnew array<int>(8);
+		Regex^ RegEx = gcnew Regex("[0-9.+-*/^]*");
+
+		stack<String ^> ^ postfixStack = gcnew stack<String^>();
+		stack<char> ^opStack = gcnew stack<char>();
+		String ^exper;
+	public:
+		Expression(String ^s) {
+			s = s->Replace(" ", "");
+			this->exper = s;
+			//0,3,2,1,-1,1,0,2
+			this->operatPriority[0] = 0;
+			this->operatPriority[1] = 3;
+			this->operatPriority[2] = 2;
+			this->operatPriority[3] = 1;
+			this->operatPriority[4] = -1;
+			this->operatPriority[5] = 1;
+			this->operatPriority[6] = 0;
+			this->operatPriority[7] = 2;
+
+		}
+		bool isAvailable() {
+			return Expression::RegEx->IsMatch(this->exper);
+		}
 	};
 }

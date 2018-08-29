@@ -20,8 +20,6 @@ namespace FunctionViewer {
 			//
 			//TODO:  在此处添加构造函数代码
 			//
-			this->initGraphics();
-			this->drawGraphics();
 		}
 
 	protected:
@@ -222,7 +220,7 @@ namespace FunctionViewer {
 			this->pictureBox1->Size = System::Drawing::Size(982, 480);
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
-			this->pictureBox1->LoadCompleted += gcnew System::ComponentModel::AsyncCompletedEventHandler(this, &MainUI::pictureBox1_LoadCompleted);
+			this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainUI::pictureBox1_Paint);
 			this->pictureBox1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainUI::pictureBox1_MouseDown);
 			this->pictureBox1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MainUI::pictureBox1_MouseMove);
 			// 
@@ -309,6 +307,14 @@ namespace FunctionViewer {
 		System::Void 退出ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			Application::Exit();
 		}
+		bool init = false;
+		System::Void pictureBox1_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+			if (!init) {
+				this->initGraphics();
+				init = true;
+			}
+			this->drawGraphics(e->Graphics);
+		}
 		System::Void MainUI_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
 			int w = this->Width;
 			int h = this->Height;
@@ -343,11 +349,10 @@ namespace FunctionViewer {
 			this->radioButton1->Refresh();
 			this->radioButton2->Refresh();
 
-			this->drawGraphics();
 		}
 		System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			initGraphics();
-			drawGraphics();
+			initGraphics(this->info->CType);
+			this->pictureBox1->Refresh();
 		}
 		System::Void 设置背景颜色ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
@@ -418,31 +423,44 @@ namespace FunctionViewer {
 				info->Location->Location_X -= (dx / (info->Zoom * 50));
 				info->Location->Location_Y += (dy / (info->Zoom * 50));
 				LastPoint = %p;
-				drawGraphics();
+
+				this->pictureBox1->Refresh();
 			} else if (e->Button == System::Windows::Forms::MouseButtons::Right) {
 				int dy;
 				Point p = e->Location;
 				dy = p.Y - LastPoint->Y;
-				info->Zoom += dy * 0.01;
+
+				Point ^center = this->getCenter();
+				int wx = center->X;
+				int wy = center->Y;
+				FPoint ^fp = this->info->toFPoint(center);
+
+				info->Zoom += dy * 0.002;
 				if (info->Zoom < 0.01) {
 					info->Zoom = 0.01;
 				}
 				LastPoint = %p;
-				drawGraphics();
+				Point ^nc = this->info->toPoint(fp);
+				Point ^LU = gcnew Point(nc->X - wx, nc->Y - wy);
+				FPoint ^newLU = this->info->toFPoint(LU);
+				info->Location->Location_X = newLU->Location_X;
+				info->Location->Location_Y = newLU->Location_Y;
+
+				this->pictureBox1->Refresh();
 			}
 
 		}
 		System::Void radioButton2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			if (this->info->CType != CoordinateType::Polar) {
 				this->initGraphics(CoordinateType::Polar);
-				this->drawGraphics();
+				this->pictureBox1->Refresh();
 			}
 		}
 
 		System::Void radioButton1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			if (this->info->CType != CoordinateType::RightAngle) {
 				this->initGraphics(CoordinateType::RightAngle);
-				this->drawGraphics();
+				this->pictureBox1->Refresh();
 			}
 		}
 		Point ^LastPoint;
@@ -473,8 +491,7 @@ namespace FunctionViewer {
 			this->pictureBox1->Visible = true;
 		}
 
-		void drawGraphics() {
-			Graphics ^g = this->pictureBox1->CreateGraphics();
+		void drawGraphics(Graphics ^g) {
 			g->Clear(style->BackgroundColor);
 			drawAxis(g);
 		}
@@ -582,11 +599,6 @@ namespace FunctionViewer {
 		Point ^ getCenter() {
 			auto p = this->pictureBox1;
 			return gcnew Point(p->Width / 2, p->Height / 2);
-		}
-		System::Void pictureBox1_LoadCompleted(System::Object^  sender, System::ComponentModel::AsyncCompletedEventArgs^  e) {
-			this->pictureBox1->Visible = true;
-			this->initGraphics();
-			this->drawGraphics();
 		}
 	};
 }
