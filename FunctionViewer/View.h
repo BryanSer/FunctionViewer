@@ -387,6 +387,7 @@ namespace View {
 		str = str->Replace(" ", "");
 		str = str->ToLower();
 		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l");
+		str = str->Replace("e", Math::E.ToString())->Replace("pi", Math::PI.ToString());
 		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l")) {
 			for (int i = 0; i < str->Length; i++) {
 				wchar_t c = str[i];
