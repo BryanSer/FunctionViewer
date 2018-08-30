@@ -1,5 +1,7 @@
 #pragma once
 #include <cliext/stack>
+#include <cliext/list>
+#include <cliext/map>
 namespace View {
 	using namespace cliext;
 	using namespace System;
@@ -161,19 +163,15 @@ namespace View {
 	public interface class Function {
 		void drawPoint(Graphics ^g);
 	};
-	//复杂表达式计算类
-	//递归计算sin cos tan lg
-	//替换常量e pi
-	//三角函数计算采用弧度制
-	public ref class ComplexExpression {
-
+	public enum Func {
+		sin, cos, tan, lg
 	};
 
 	//简单表达式计算类
 	public ref class Expression {
 	private:
 		array<int> ^operatPriority = gcnew array<int>(8);
-		Regex^ RegEx = gcnew Regex("[0-9.+\\-*/^]*");
+		Regex^ RegEx = gcnew Regex("[0-9.+*/^-]*");
 
 		stack<String ^> ^ postfixStack = gcnew stack<String^>();
 		stack<wchar_t> ^opStack = gcnew stack<wchar_t>();
@@ -224,7 +222,7 @@ namespace View {
 		double calculate(String ^str) {
 			stack<String^> ^resultStack = gcnew stack<String^>();
 			prepare(str);
-			reverseStack(postfixStack); 
+			reverseStack(postfixStack);
 			String ^firstValue, ^secondValue, ^currentValue;
 			while (!postfixStack->empty()) {
 				currentValue = postfixStack->top();
@@ -266,7 +264,7 @@ namespace View {
 							postfixStack->push(c.ToString());
 						}
 						opStack->pop();
-					}else {
+					} else {
 						while (currentOp != '(' && peekOp != ',' && compare(currentOp, peekOp)) {
 							wchar_t top = opStack->top();
 							opStack->pop();
@@ -332,7 +330,7 @@ namespace View {
 				return gcnew String(arr);
 			}
 		}
-	 bool compare(wchar_t cur, wchar_t peek) {// 如果是peek优先级高于cur，返回true，默认都是peek优先级要低
+		bool compare(wchar_t cur, wchar_t peek) {// 如果是peek优先级高于cur，返回true，默认都是peek优先级要低
 			bool result = false;
 			if (cur == '^') {
 				return false;
@@ -363,5 +361,67 @@ namespace View {
 			return calculate(str);
 		}
 	};
+
+
+	//从指定的index开始切断字符串到与之封闭的右括号
+	static String ^cutSubString(String ^old, int index) {
+		int num = 0;
+		for (int i = index; i < old->Length; i++) {
+			if (old[i] == '(') {
+				num++;
+			}
+			if (old[i] == ')') {
+				num--;
+				if (num == 0) {
+					return gcnew String(old->ToCharArray(), index + 1, i - index - 1);
+				}
+			}
+		}
+		return gcnew String(old->ToCharArray(), index + 1, old->Length - index - 1);
+	}
+	//复杂表达式计算
+	//递归计算sin cos tan lg
+	//替换常量e pi
+	//三角函数计算采用弧度制
+	static double calc(String ^str) {
+		str = str->Replace(" ", "");
+		str = str->ToLower();
+		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l");
+		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l")) {
+			for (int i = 0; i < str->Length; i++) {
+				wchar_t c = str[i];
+				if (c == 's') {
+					String ^sub = cutSubString(str, i + 1);
+					double tmp = Math::Sin(calc(sub));
+					sub = "s(" + sub + ")";
+					str = str->Replace(sub, tmp.ToString());
+					break;
+				}
+				if (c == 'c') {
+					String ^sub = cutSubString(str, i + 1);
+					double tmp = Math::Cos(calc(sub));
+					sub = "c(" + sub + ")";
+					str = str->Replace(sub, tmp.ToString());
+					break;
+				}
+				if (c == 't') {
+					String ^sub = cutSubString(str, i + 1);
+					double tmp = Math::Tan(calc(sub));
+					sub = "t(" + sub + ")";
+					str = str->Replace(sub, tmp.ToString());
+					break;
+				}
+				if (c == 'l') {
+					String ^sub = cutSubString(str, i + 1);
+					double tmp = Math::Log10(calc(sub));
+					sub = "l(" + sub + ")";
+					str = str->Replace(sub, tmp.ToString());
+					break;
+				}
+			}
+		}
+		Expression ^e = gcnew Expression(str);
+		return e->calc();
+	}
 
 }

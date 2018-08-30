@@ -358,50 +358,59 @@ namespace FunctionViewer {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->BackgroundColor = cd->Color;
+			this->pictureBox1->Refresh();
 			delete cd;
 		}
 		System::Void 设置坐标轴颜色ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->AxisColor = cd->Color;
+			this->pictureBox1->Refresh();
 			delete cd;
 		}
 		System::Void 设置曲线颜色ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->LineColor = cd->Color;
+			this->pictureBox1->Refresh();
 			delete cd;
 		}
 		System::Void 设置字体颜色ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->FontColor = cd->Color;
+			this->pictureBox1->Refresh();
 			delete cd;
 		}
 		System::Void toolStripMenuItem2_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem2->Checked = true;
 			this->style->Width = 1;
+			this->pictureBox1->Refresh();
 		}
 		System::Void toolStripMenuItem3_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem3->Checked = true;
 			this->style->Width = 2;
+			this->pictureBox1->Refresh();
 		}
 		System::Void toolStripMenuItem4_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem4->Checked = true;
 			this->style->Width = 3;
+			this->pictureBox1->Refresh();
 		}
 		System::Void toolStripMenuItem5_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem5->Checked = true;
 			this->style->Width = 4;
+			this->pictureBox1->Refresh();
 		}
 		System::Void toolStripMenuItem6_Click(System::Object^  sender, System::EventArgs^  e) {
 			uncheckAllStrip();
 			this->toolStripMenuItem6->Checked = true;
 			this->style->Width = 5;
+			this->pictureBox1->Refresh();
 		}
 
 		void uncheckAllStrip() {
@@ -454,6 +463,7 @@ namespace FunctionViewer {
 			if (this->info->CType != CoordinateType::Polar) {
 				this->initGraphics(CoordinateType::Polar);
 				this->pictureBox1->Refresh();
+				this->label1->Text = "ρ=";
 			}
 		}
 
@@ -461,6 +471,7 @@ namespace FunctionViewer {
 			if (this->info->CType != CoordinateType::RightAngle) {
 				this->initGraphics(CoordinateType::RightAngle);
 				this->pictureBox1->Refresh();
+				this->label1->Text = "y=";
 			}
 		}
 		Point ^LastPoint;
@@ -504,10 +515,33 @@ namespace FunctionViewer {
 			SolidBrush ^arrbsh = gcnew SolidBrush(this->style->AxisColor);
 			Point ^center = this->info->toPoint(gcnew FPoint(0, 0));
 			SolidBrush ^fontbsh = gcnew SolidBrush(this->style->FontColor);
+			Drawing::Font ^font = gcnew Drawing::Font("隶书", 12);
 			if (info->CType == CoordinateType::Polar) {
 				g->DrawArc(p, Rectangle(center->X, center->Y - 1, 3, 3), 0, 360);
 				g->DrawLine(p, center->X, center->Y, pbox->Width, center->Y);
-				g->DrawString("○", gcnew Drawing::Font("隶书", 9), fontbsh, Point(center->X - 18, center->Y - 5));
+				g->DrawString("0", font, fontbsh, Point(center->X - 5, center->Y + 6));
+				if (center->X <= this->pictureBox1->Width){
+					g->FillClosedCurve(arrbsh, getArrowPoint_Right(Point(this->pictureBox1->Width, center->Y)));
+				}
+
+
+				//绘制刻度
+				int interval = (0.5 / zoom) * 2;
+				if (interval < 1) {
+					interval = 1;
+				}
+				FPoint ^o = gcnew FPoint(0, 0);
+				FPoint ^end = this->info->toFPoint(Point(this->pictureBox1->Width, center->Y));
+				for (int i = o->Location_X + 1; i < end->Location_X; i++) {
+					FPoint ^start = gcnew FPoint(i, 0);
+					Point ^wp = this->info->toPoint(start);
+					if (i % interval == 0) {
+						g->DrawLine(p, *wp, Point(wp->X, wp->Y - 5));
+						g->DrawString("" + i, font, fontbsh, Point(wp->X - 5 - (i < 0 ? 5 : 0), wp->Y + 6));
+					} else if (interval < 5) {
+						g->DrawLine(p, *wp, Point(wp->X, wp->Y - 3));
+					}
+				}
 				return;
 			}
 
@@ -516,7 +550,7 @@ namespace FunctionViewer {
 				//X轴
 			g->DrawLine(p, 0, center->Y, this->pictureBox1->Width, center->Y);
 			g->FillClosedCurve(arrbsh, getArrowPoint_Right(Point(this->pictureBox1->Width, center->Y)));
-			g->DrawString("x", gcnew Drawing::Font("隶书", 12), fontbsh, Point(this->pictureBox1->Width - 15, center->Y + 15));
+			g->DrawString("x", gcnew Drawing::Font("隶书", 12), fontbsh, Point(this->pictureBox1->Width - 15, center->Y + 18));
 			//}
 
 			float displayW = pbox->Width / (zoom * 50);
@@ -530,7 +564,7 @@ namespace FunctionViewer {
 				nw += 10;
 			}
 			if (LU->Location_Y < 0) {
-				nw += 10;
+				nw += 15;
 			}
 			g->DrawString("y", gcnew Drawing::Font("隶书", 12), fontbsh, Point(center->X - 20 - nw, 5));
 			//}
@@ -542,7 +576,6 @@ namespace FunctionViewer {
 				interval = 1;
 			}
 			FPoint ^RD = this->info->toFPoint(gcnew Point(pbox->Width, pbox->Height));
-			Drawing::Font ^f = gcnew Drawing::Font("隶书", 12);
 			for (int i = LU->Location_X; i <= RD->Location_X; i += 1) {
 				if (i == 0) {
 					continue;
@@ -551,7 +584,7 @@ namespace FunctionViewer {
 				Point ^wp = this->info->toPoint(start);
 				if (i % interval == 0) {
 					g->DrawLine(p, *wp, Point(wp->X, wp->Y - 5));
-					g->DrawString("" + i, f, fontbsh, Point(wp->X - 5 - (i < 0 ? 5 : 0), wp->Y + 6));
+					g->DrawString("" + i, font, fontbsh, Point(wp->X - 5 - (i < 0 ? 5 : 0), wp->Y + 6));
 				} else if (interval < 5) {
 					g->DrawLine(p, *wp, Point(wp->X, wp->Y - 3));
 				}
@@ -569,7 +602,7 @@ namespace FunctionViewer {
 					for (int t = Math::Abs(i); t >= 10; t /= 10) {
 						pan += 12;
 					}
-					g->DrawString("" + i, f, fontbsh, Point(wp->X - 3 - pan - (i < 0 ? 12 : 0), wp->Y - 12));
+					g->DrawString("" + i, font, fontbsh, Point(wp->X - 3 - pan - (i < 0 ? 12 : 0), wp->Y - 12));
 				} else if (interval < 5) {
 					g->DrawLine(p, *wp, Point(wp->X + 3, wp->Y));
 				}
