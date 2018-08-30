@@ -4,7 +4,7 @@ namespace View {
 	using namespace cliext;
 	using namespace System;
 	using namespace System::Drawing;
-	using namespace System::Collections; 
+	using namespace System::Collections;
 	using namespace System::Text::RegularExpressions;
 	public enum class CoordinateType {
 		RightAngle, Polar
@@ -159,17 +159,137 @@ namespace View {
 	};
 
 	public interface class Function {
-		ArrayList ^calcPoint();
+		void drawPoint(Graphics ^g);
+	};
+	//复杂表达式计算类
+	//递归计算sin cos tan lg
+	//替换常量e pi
+	//三角函数计算采用弧度制
+	public ref class ComplexExpression {
+
 	};
 
+	//简单表达式计算类
 	public ref class Expression {
 	private:
 		array<int> ^operatPriority = gcnew array<int>(8);
-		Regex^ RegEx = gcnew Regex("[0-9.+-*/^]*");
+		Regex^ RegEx = gcnew Regex("[0-9.+\\-*/^]*");
 
 		stack<String ^> ^ postfixStack = gcnew stack<String^>();
-		stack<char> ^opStack = gcnew stack<char>();
+		stack<wchar_t> ^opStack = gcnew stack<wchar_t>();
 		String ^exper;
+
+
+		static void insertAtBottom(stack<String^> ^st, String ^data) {
+			if ((st->empty())) {
+				st->push(data);
+			} else {
+				String ^temp = st->top();
+				st->pop();
+				insertAtBottom(st, data);
+				st->push(temp);
+			}
+		}
+
+		static void reverseStack(stack<String^> ^st) {
+			if (!(st->empty())) {
+				String ^temp = st->top();
+				st->pop();
+				reverseStack(st);
+				insertAtBottom(st, temp);
+			}
+		}
+		static double calculate(String ^firstValue, String ^secondValue, wchar_t currentOp) {
+			double result = 0;
+			switch (currentOp) {
+			case '+':
+				result = Double::Parse(firstValue) + Double::Parse(secondValue);
+				break;
+			case '-':
+				result = Double::Parse(firstValue) - Double::Parse(secondValue);
+				break;
+			case '*':
+				result = Double::Parse(firstValue) * Double::Parse(secondValue);
+				break;
+			case '/':
+				result = Double::Parse(firstValue) / Double::Parse(secondValue);
+				break;
+			case '^':
+				result = Math::Pow(Double::Parse(firstValue), Double::Parse(secondValue));
+				break;
+			}
+			return result;
+		}
+
+		double calculate(String ^str) {
+			stack<String^> ^resultStack = gcnew stack<String^>();
+			prepare(str);
+			reverseStack(postfixStack); 
+			String ^firstValue, ^secondValue, ^currentValue;
+			while (!postfixStack->empty()) {
+				currentValue = postfixStack->top();
+				postfixStack->pop();
+				if (!isOperator(currentValue[0])) {
+					currentValue = currentValue->Replace("~", "-");
+					resultStack->push(currentValue);
+				} else {
+					secondValue = resultStack->top();
+					resultStack->pop();
+					firstValue = resultStack->top();
+					resultStack->pop();
+
+					firstValue = firstValue->Replace("~", "-");
+					secondValue = secondValue->Replace("~", "-");
+					double tempResult = calculate(firstValue, secondValue, currentValue[0]);
+					resultStack->push(tempResult.ToString());
+				}
+			}
+			return Double::Parse(resultStack->top());
+		}
+		void prepare(String ^str) {
+			opStack->push(',');
+			array<wchar_t>^ arr = str->ToCharArray();
+			int currentIndex = 0;
+			int count = 0;
+			wchar_t currentOp, peekOp;
+			for (int i = 0; i < arr->Length; i++) {
+				currentOp = arr[i];
+				if (isOperator(currentOp)) {
+					if (count > 0) {
+						postfixStack->push(gcnew String(arr, currentIndex, count));
+					}
+					peekOp = opStack->top();
+					if (currentOp == ')') {
+						while (opStack->top() != '(') {
+							wchar_t c = opStack->top();
+							opStack->pop();
+							postfixStack->push(c.ToString());
+						}
+						opStack->pop();
+					}else {
+						while (currentOp != '(' && peekOp != ',' && compare(currentOp, peekOp)) {
+							wchar_t top = opStack->top();
+							opStack->pop();
+							postfixStack->push(top.ToString());
+							peekOp = opStack->top();
+						}
+						opStack->push(currentOp);
+					}
+					count = 0;
+					currentIndex = i + 1;
+				} else {
+					count++;
+				}
+			}
+			if (count > 1 || (count == 1 && !isOperator(arr[currentIndex]))) {
+				postfixStack->push(gcnew String(arr, currentIndex, count));
+			}
+			while (opStack->top() != ',') {
+				wchar_t c = opStack->top();
+				opStack->pop();
+				postfixStack->push(c.ToString());
+			}
+		}
 	public:
 		Expression(String ^s) {
 			s = s->Replace(" ", "");
@@ -183,10 +303,65 @@ namespace View {
 			this->operatPriority[5] = 1;
 			this->operatPriority[6] = 0;
 			this->operatPriority[7] = 2;
-
 		}
 		bool isAvailable() {
 			return Expression::RegEx->IsMatch(this->exper);
 		}
+		static bool isOperator(wchar_t c) {
+			return c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')' || c == '^';
+		}
+
+		static String ^transform(String ^str) {
+			array<wchar_t>^ arr = str->ToCharArray();
+			for (int i = 0; i < arr->Length; i++) {
+				if (arr[i] == '-') {
+					if (i == 0) {
+						arr[i] = '~';
+					} else {
+						wchar_t c = arr[i - 1];
+						if (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == 'E' || c == 'e' || c == '^') {
+							arr[i] = '~';
+						}
+					}
+				}
+			}
+			if (arr[0] == '~' || arr[1] == '(') {
+				arr[0] = '-';
+				return "0" + gcnew String(arr);
+			} else {
+				return gcnew String(arr);
+			}
+		}
+	 bool compare(wchar_t cur, wchar_t peek) {// 如果是peek优先级高于cur，返回true，默认都是peek优先级要低
+			bool result = false;
+			if (cur == '^') {
+				return false;
+			}
+			if (peek == '^') {
+				return false;
+			}
+			if (operatPriority[(peek)-40] >= operatPriority[(cur)-40]) {
+				result = true;
+			}
+			return result;
+		}
+
+		double calc() {
+			bool number = true;
+			array<wchar_t>^ chars = this->exper->ToCharArray();
+			for (int i = 0; i < chars->Length; i++) {
+				wchar_t c = chars[i];
+				if (isOperator(c)) {
+					number = false;
+					break;
+				}
+			}
+			if (number) {
+				return Double::Parse(this->exper);
+			}
+			String ^str = transform(this->exper);
+			return calculate(str);
+		}
 	};
+
 }
