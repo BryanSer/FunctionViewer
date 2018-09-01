@@ -107,6 +107,13 @@ namespace View {
 			return gcnew FPoint(x, -y);
 		}
 
+		float toFPoint_x(int x) {
+			float zoom = this->Zoom;
+			float xx = x / (50 * zoom);
+			xx += this->Location->Location_X;
+			return xx;
+		}
+
 	};
 	//图形样式
 	public ref class Style {
@@ -161,8 +168,11 @@ namespace View {
 	};
 
 	public interface class Function {
-		void drawPoint(Graphics ^g);
+		//绘制方法
+		//参数start与end表示始末坐标(x上的)
+		void drawPoint(Graphics ^g, Point ^start, Point ^end, ViewInfo ^info, Pen ^p);
 	};
+
 	public enum Func {
 		sin, cos, tan, lg
 	};
@@ -188,7 +198,7 @@ namespace View {
 				st->push(temp);
 			}
 		}
-
+		//翻转堆栈
 		static void reverseStack(stack<String^> ^st) {
 			if (!(st->empty())) {
 				String ^temp = st->top();
@@ -197,6 +207,7 @@ namespace View {
 				insertAtBottom(st, temp);
 			}
 		}
+		//计算工具
 		static double calculate(String ^firstValue, String ^secondValue, wchar_t currentOp) {
 			double result = 0;
 			switch (currentOp) {
@@ -218,7 +229,7 @@ namespace View {
 			}
 			return result;
 		}
-
+		//计算表达式
 		double calculate(String ^str) {
 			stack<String^> ^resultStack = gcnew stack<String^>();
 			prepare(str);
@@ -244,6 +255,7 @@ namespace View {
 			}
 			return Double::Parse(resultStack->top());
 		}
+		//处理表达式
 		void prepare(String ^str) {
 			opStack->push(',');
 			array<wchar_t>^ arr = str->ToCharArray();
@@ -309,6 +321,7 @@ namespace View {
 			return c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')' || c == '^';
 		}
 
+		//将-号用~代替
 		static String ^transform(String ^str) {
 			array<wchar_t>^ arr = str->ToCharArray();
 			for (int i = 0; i < arr->Length; i++) {
@@ -323,7 +336,7 @@ namespace View {
 					}
 				}
 			}
-			if (arr[0] == '~' || arr[1] == '(') {
+			if (arr[0] == '~' && arr[1] == '(') {
 				arr[0] = '-';
 				return "0" + gcnew String(arr);
 			} else {
@@ -343,7 +356,6 @@ namespace View {
 			}
 			return result;
 		}
-
 		double calc() {
 			bool number = true;
 			array<wchar_t>^ chars = this->exper->ToCharArray();
@@ -387,7 +399,7 @@ namespace View {
 		str = str->Replace(" ", "");
 		str = str->ToLower();
 		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l");
-		str = str->Replace("e", Math::E.ToString())->Replace("pi", Math::PI.ToString());
+		str = str->Replace("ee", Math::E.ToString())->Replace("pi", Math::PI.ToString());
 		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l")) {
 			for (int i = 0; i < str->Length; i++) {
 				wchar_t c = str[i];
@@ -414,7 +426,14 @@ namespace View {
 				}
 				if (c == 'l') {
 					String ^sub = cutSubString(str, i + 1);
-					double tmp = Math::Log10(calc(sub));
+					double r = calc(sub);
+					double tmp;
+					if (r > 0) {
+						tmp = Math::Log10(calc(sub));
+					} else {
+						tmp = 0;
+					}
+
 					sub = "l(" + sub + ")";
 					str = str->Replace(sub, tmp.ToString());
 					break;
@@ -424,5 +443,39 @@ namespace View {
 		Expression ^e = gcnew Expression(str);
 		return e->calc();
 	}
+
+
+
+	public ref class PolarFunction : public Function {
+	private:
+		String ^FuncString;
+	public:
+		PolarFunction(String ^str) {
+			this->FuncString = str;
+		}
+		void drawPoint(Graphics ^g, Point ^start, Point ^end, ViewInfo ^info, Pen ^pen) override {
+			for (int x = start->X; x <= end->X; x++) {
+				float fx = info->toFPoint_x(x);
+				String ^expr = replace(this->FuncString, fx);
+				double y = calc(expr);
+				Point ^p1 = info->toPoint(gcnew FPoint(fx, y));
+
+				x++;
+				fx = info->toFPoint_x(x);
+				expr = replace(this->FuncString, fx);
+				float y2 = calc(expr);
+				if (Math::Abs(y2 - y) > 100 * (1.0f / info->Zoom)) {
+					continue;
+				}
+				Point ^p2 = info->toPoint(gcnew FPoint(fx, y2));
+				g->DrawLine(pen, *p1, *p2);
+				x--;
+			}
+		}
+		String ^replace(String ^str, float x) {
+			String ^r = x.ToString();
+			return str->Replace("x", r);
+		}
+	};
 
 }

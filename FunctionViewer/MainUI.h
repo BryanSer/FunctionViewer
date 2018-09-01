@@ -505,6 +505,16 @@ namespace FunctionViewer {
 		void drawGraphics(Graphics ^g) {
 			g->Clear(style->BackgroundColor);
 			drawAxis(g);
+			drawFunction(g);
+		}
+
+		void drawFunction(Graphics ^g) {
+			if (this->textBox1->Text == "") {
+				return;
+			}
+			PolarFunction ^pf = gcnew PolarFunction(this->textBox1->Text);
+			Pen ^p = gcnew Pen(this->style->LineColor, this->style->Width);
+			pf->drawPoint(g, gcnew Point(0, 0), gcnew Point(this->pictureBox1->Width, 0), this->info, p);
 		}
 
 		void drawAxis(Graphics ^g) {
@@ -520,7 +530,7 @@ namespace FunctionViewer {
 				g->DrawArc(p, Rectangle(center->X, center->Y - 1, 3, 3), 0, 360);
 				g->DrawLine(p, center->X, center->Y, pbox->Width, center->Y);
 				g->DrawString("0", font, fontbsh, Point(center->X - 5, center->Y + 6));
-				if (center->X <= this->pictureBox1->Width){
+				if (center->X <= this->pictureBox1->Width) {
 					g->FillClosedCurve(arrbsh, getArrowPoint_Right(Point(this->pictureBox1->Width, center->Y)));
 				}
 
