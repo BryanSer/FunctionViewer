@@ -398,7 +398,7 @@ namespace View {
 	static double calc(String ^str) {
 		str = str->Replace(" ", "");
 		str = str->ToLower();
-		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l");
+		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l")->Replace("ln", "n");
 		str = str->Replace("ee", Math::E.ToString())->Replace("pi", Math::PI.ToString());
 		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l")) {
 			for (int i = 0; i < str->Length; i++) {
@@ -438,6 +438,20 @@ namespace View {
 					str = str->Replace(sub, tmp.ToString());
 					break;
 				}
+				if (c == 'n') {
+					String ^sub = cutSubString(str, i + 1);
+					double r = calc(sub);
+					double tmp;
+					if (r > 0) {
+						tmp = Math::Log(calc(sub), Math::E);
+					} else {
+						tmp = 0;
+					}
+
+					sub = "n(" + sub + ")";
+					str = str->Replace(sub, tmp.ToString());
+					break;
+				}
 			}
 		}
 		Expression ^e = gcnew Expression(str);
@@ -446,11 +460,11 @@ namespace View {
 
 
 
-	public ref class PolarFunction : public Function {
+	public ref class RightAngleFunction : public Function {
 	private:
 		String ^FuncString;
 	public:
-		PolarFunction(String ^str) {
+		RightAngleFunction(String ^str) {
 			this->FuncString = str;
 		}
 		void drawPoint(Graphics ^g, Point ^start, Point ^end, ViewInfo ^info, Pen ^pen) override {
@@ -475,6 +489,37 @@ namespace View {
 		String ^replace(String ^str, float x) {
 			String ^r = x.ToString();
 			return str->Replace("x", r);
+		}
+	};
+
+	public ref class PolarFunction : public Function {
+	private:
+		String ^FuncString;
+	public:
+		PolarFunction(String ^str) {
+			this->FuncString = str;
+		}
+		void drawPoint(Graphics ^g, Point ^start, Point ^end, ViewInfo ^info, Pen ^pen) override {
+			for (float st = 0; st <= Math::PI * 2; st += Math::PI / 1200) {
+				String ^expr = this->FuncString->Replace("¦È", st.ToString());
+				float p = calc(expr);
+				FPoint ^point1 = transform(p, st);
+				st += Math::PI / 1200;
+				expr = this->FuncString->Replace("¦È", st.ToString());
+				p = calc(expr);
+				FPoint ^point2 = transform(p, st);
+
+				if (Math::Sqrt(Math::Pow(point1->Location_X - point2->Location_X, 2) + Math::Pow(point1->Location_Y - point2->Location_Y, 2)) > 0.1 * (1.0f / info->Zoom)) {
+					continue;
+				}
+
+				g->DrawLine(pen, *info->toPoint(point1), *info->toPoint(point2));
+				st -= Math::PI / 1200;
+			}
+		}
+
+		FPoint ^transform(float ¦Ñ, float ¦È) {
+			return gcnew FPoint(¦Ñ * Math::Cos(¦È), ¦Ñ * Math::Sin(¦È));
 		}
 	};
 

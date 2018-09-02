@@ -256,6 +256,7 @@ namespace FunctionViewer {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(312, 23);
 			this->textBox1->TabIndex = 4;
+			this->textBox1->Leave += gcnew System::EventHandler(this, &MainUI::textBox1_Leave);
 			// 
 			// label1
 			// 
@@ -474,6 +475,11 @@ namespace FunctionViewer {
 				this->label1->Text = "y=";
 			}
 		}
+		System::Void textBox1_Leave(System::Object^  sender, System::EventArgs^  e) {
+			if (this->info->CType == CoordinateType::Polar) {
+				this->textBox1->Text = this->textBox1->Text->Replace("x", "θ");
+			}
+		}
 		Point ^LastPoint;
 		Style ^style = gcnew Style();
 		ViewInfo ^info = nullptr;
@@ -512,9 +518,18 @@ namespace FunctionViewer {
 			if (this->textBox1->Text == "") {
 				return;
 			}
-			PolarFunction ^pf = gcnew PolarFunction(this->textBox1->Text);
+			Function ^func = nullptr;
+			if (this->info->CType == CoordinateType::RightAngle) {
+				func = gcnew RightAngleFunction(this->textBox1->Text);
+			} else {
+				func = gcnew PolarFunction(this->textBox1->Text);
+			}
 			Pen ^p = gcnew Pen(this->style->LineColor, this->style->Width);
-			pf->drawPoint(g, gcnew Point(0, 0), gcnew Point(this->pictureBox1->Width, 0), this->info, p);
+			try {
+				func->drawPoint(g, gcnew Point(0, 0), gcnew Point(this->pictureBox1->Width, 0), this->info, p);
+			} catch (Exception ^e) {
+				MessageBox::Show("错误 表达式异常");
+			}
 		}
 
 		void drawAxis(Graphics ^g) {
@@ -643,5 +658,6 @@ namespace FunctionViewer {
 			auto p = this->pictureBox1;
 			return gcnew Point(p->Width / 2, p->Height / 2);
 		}
-	};
+	
+};
 }
