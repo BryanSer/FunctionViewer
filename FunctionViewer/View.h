@@ -400,7 +400,7 @@ namespace View {
 		str = str->ToLower();
 		str = str->Replace("sin", "s")->Replace("cos", "c")->Replace("tg", "t")->Replace("tan", "t")->Replace("lg", "l")->Replace("ln", "n");
 		str = str->Replace("ee", Math::E.ToString())->Replace("pi", Math::PI.ToString());
-		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l")) {
+		while (str->Contains("s") || str->Contains("c") || str->Contains("t") || str->Contains("l") || str->Contains("n")) {
 			for (int i = 0; i < str->Length; i++) {
 				wchar_t c = str[i];
 				if (c == 's') {
@@ -429,7 +429,7 @@ namespace View {
 					double r = calc(sub);
 					double tmp;
 					if (r > 0) {
-						tmp = Math::Log10(calc(sub));
+						tmp = Math::Log10(r);
 					} else {
 						tmp = 0;
 					}
@@ -443,7 +443,7 @@ namespace View {
 					double r = calc(sub);
 					double tmp;
 					if (r > 0) {
-						tmp = Math::Log(calc(sub), Math::E);
+						tmp = Math::Log(r, Math::E);
 					} else {
 						tmp = 0;
 					}

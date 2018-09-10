@@ -21,6 +21,12 @@
     <ClInclude Include="MainUI.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="About.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FVHelp.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -29,5 +35,10 @@
     <ClCompile Include="MainUI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainUI.resx">
+      <Filter>资源文件</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

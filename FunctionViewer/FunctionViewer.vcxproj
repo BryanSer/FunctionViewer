@@ -134,6 +134,12 @@
     <ClCompile Include="MainUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="About.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="FVHelp.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MainUI.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -143,6 +149,12 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FVHelp.resx">
+      <DependentUpon>FVHelp.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.h</DependentUpon>
     </EmbeddedResource>

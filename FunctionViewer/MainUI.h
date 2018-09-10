@@ -1,5 +1,7 @@
-#pragma once
+ï»¿#pragma once
 #include "View.h"
+#include "About.h"
+#include "FVHelp.h"
 namespace FunctionViewer {
 
 	using namespace System;
@@ -11,20 +13,20 @@ namespace FunctionViewer {
 	using namespace View;
 
 	/// <summary>
-	/// MainUI ÕªÒª
+	/// MainUI æ‘˜è¦
 	/// </summary>
 	public ref class MainUI : public System::Windows::Forms::Form {
 	public:
 		MainUI(void) {
 			InitializeComponent();
 			//
-			//TODO:  ÔÚ´Ë´¦Ìí¼Ó¹¹Ôìº¯Êı´úÂë
+			//TODO:  åœ¨æ­¤å¤„æ·»åŠ æ„é€ å‡½æ•°ä»£ç 
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// ÇåÀíËùÓĞÕıÔÚÊ¹ÓÃµÄ×ÊÔ´¡£
+		/// æ¸…ç†æ‰€æœ‰æ­£åœ¨ä½¿ç”¨çš„èµ„æºã€‚
 		/// </summary>
 		~MainUI() {
 			if (components) {
@@ -33,54 +35,89 @@ namespace FunctionViewer {
 		}
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	protected:
-	private: System::Windows::Forms::ToolStripMenuItem^  ¿ªÊ¼ToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÖØÖÃ½çÃæToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÍË³öToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  å¼€å§‹ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  é‡ç½®ç•Œé¢ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  é€€å‡ºToolStripMenuItem;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	private: System::Windows::Forms::RadioButton^  radioButton1;
 	private: System::Windows::Forms::RadioButton^  radioButton2;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::ToolStripMenuItem^  ·ç¸ñToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÇúÏß¿í¶ÈToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  é£æ ¼ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  æ›²çº¿å®½åº¦ToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem2;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem3;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem4;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem5;
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem6;
-	private: System::Windows::Forms::ToolStripMenuItem^  ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  å¿«é€Ÿå¡«å……ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  yxToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  yx2ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ysinxToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ycosxToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ylnxToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem7;
+	private: System::Windows::Forms::ToolStripMenuItem^  å¸®åŠ©ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ÏlnÎ¸ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  Ï2ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  ÏcosÎ¸ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  å…³äºToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  Ïcos2Î¸ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  Ï21cosÎ¸ToolStripMenuItem;
+
+	private: System::Windows::Forms::ToolStripMenuItem^  Ïe2Î¸ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  Ï2sin3Î¸ToolStripMenuItem;
 
 	private:
 		/// <summary>
-		/// ±ØĞèµÄÉè¼ÆÆ÷±äÁ¿¡£
+		/// å¿…éœ€çš„è®¾è®¡å™¨å˜é‡ã€‚
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Éè¼ÆÆ÷Ö§³ÖËùĞèµÄ·½·¨ - ²»ÒªĞŞ¸Ä
-		/// Ê¹ÓÃ´úÂë±à¼­Æ÷ĞŞ¸Ä´Ë·½·¨µÄÄÚÈİ¡£
+		/// è®¾è®¡å™¨æ”¯æŒæ‰€éœ€çš„æ–¹æ³• - ä¸è¦ä¿®æ”¹
+		/// ä½¿ç”¨ä»£ç ç¼–è¾‘å™¨ä¿®æ”¹æ­¤æ–¹æ³•çš„å†…å®¹ã€‚
 		/// </summary>
 		void InitializeComponent(void) {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->¿ªÊ¼ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÖØÖÃ½çÃæToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÍË³öToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->·ç¸ñToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ÇúÏß¿í¶ÈToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->å¼€å§‹ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->é‡ç½®ç•Œé¢ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->é€€å‡ºToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->é£æ ¼ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->æ›²çº¿å®½åº¦ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem3 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem4 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem5 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem6 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->å¿«é€Ÿå¡«å……ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->yxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->yx2ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ysinxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ycosxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ylnxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ÏlnÎ¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ï2ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ÏcosÎ¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ïcos2Î¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ï21cosÎ¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ïe2Î¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ï2sin3Î¸ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->å¸®åŠ©ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->å…³äºToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
@@ -94,9 +131,9 @@ namespace FunctionViewer {
 			// menuStrip1
 			// 
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(18, 18);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->¿ªÊ¼ToolStripMenuItem,
-					this->·ç¸ñToolStripMenuItem
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->å¼€å§‹ToolStripMenuItem,
+					this->é£æ ¼ToolStripMenuItem, this->å¿«é€Ÿå¡«å……ToolStripMenuItem, this->å¸®åŠ©ToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -104,77 +141,77 @@ namespace FunctionViewer {
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// ¿ªÊ¼ToolStripMenuItem
+			// å¼€å§‹ToolStripMenuItem
 			// 
-			this->¿ªÊ¼ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->ÖØÖÃ½çÃæToolStripMenuItem,
-					this->ÍË³öToolStripMenuItem
+			this->å¼€å§‹ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->é‡ç½®ç•Œé¢ToolStripMenuItem,
+					this->é€€å‡ºToolStripMenuItem
 			});
-			this->¿ªÊ¼ToolStripMenuItem->Name = L"¿ªÊ¼ToolStripMenuItem";
-			this->¿ªÊ¼ToolStripMenuItem->Size = System::Drawing::Size(49, 24);
-			this->¿ªÊ¼ToolStripMenuItem->Text = L"¿ªÊ¼";
+			this->å¼€å§‹ToolStripMenuItem->Name = L"å¼€å§‹ToolStripMenuItem";
+			this->å¼€å§‹ToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->å¼€å§‹ToolStripMenuItem->Text = L"å¼€å§‹";
 			// 
-			// ÖØÖÃ½çÃæToolStripMenuItem
+			// é‡ç½®ç•Œé¢ToolStripMenuItem
 			// 
-			this->ÖØÖÃ½çÃæToolStripMenuItem->Name = L"ÖØÖÃ½çÃæToolStripMenuItem";
-			this->ÖØÖÃ½çÃæToolStripMenuItem->Size = System::Drawing::Size(138, 24);
-			this->ÖØÖÃ½çÃæToolStripMenuItem->Text = L"ÖØÖÃ½çÃæ";
-			this->ÖØÖÃ½çÃæToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÖØÖÃ½çÃæToolStripMenuItem_Click);
+			this->é‡ç½®ç•Œé¢ToolStripMenuItem->Name = L"é‡ç½®ç•Œé¢ToolStripMenuItem";
+			this->é‡ç½®ç•Œé¢ToolStripMenuItem->Size = System::Drawing::Size(138, 24);
+			this->é‡ç½®ç•Œé¢ToolStripMenuItem->Text = L"é‡ç½®ç•Œé¢";
+			this->é‡ç½®ç•Œé¢ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::é‡ç½®ç•Œé¢ToolStripMenuItem_Click);
 			// 
-			// ÍË³öToolStripMenuItem
+			// é€€å‡ºToolStripMenuItem
 			// 
-			this->ÍË³öToolStripMenuItem->Name = L"ÍË³öToolStripMenuItem";
-			this->ÍË³öToolStripMenuItem->Size = System::Drawing::Size(138, 24);
-			this->ÍË³öToolStripMenuItem->Text = L"ÍË³ö";
-			this->ÍË³öToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÍË³öToolStripMenuItem_Click);
+			this->é€€å‡ºToolStripMenuItem->Name = L"é€€å‡ºToolStripMenuItem";
+			this->é€€å‡ºToolStripMenuItem->Size = System::Drawing::Size(138, 24);
+			this->é€€å‡ºToolStripMenuItem->Text = L"é€€å‡º";
+			this->é€€å‡ºToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::é€€å‡ºToolStripMenuItem_Click);
 			// 
-			// ·ç¸ñToolStripMenuItem
+			// é£æ ¼ToolStripMenuItem
 			// 
-			this->·ç¸ñToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
-				this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem,
-					this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem, this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem, this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem, this->ÇúÏß¿í¶ÈToolStripMenuItem
+			this->é£æ ¼ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem,
+					this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem, this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem, this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem, this->æ›²çº¿å®½åº¦ToolStripMenuItem
 			});
-			this->·ç¸ñToolStripMenuItem->Name = L"·ç¸ñToolStripMenuItem";
-			this->·ç¸ñToolStripMenuItem->Size = System::Drawing::Size(49, 24);
-			this->·ç¸ñToolStripMenuItem->Text = L"·ç¸ñ";
+			this->é£æ ¼ToolStripMenuItem->Name = L"é£æ ¼ToolStripMenuItem";
+			this->é£æ ¼ToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->é£æ ¼ToolStripMenuItem->Text = L"é£æ ¼";
 			// 
-			// ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem
+			// è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem
 			// 
-			this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem->Name = L"ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem";
-			this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
-			this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem->Text = L"ÉèÖÃ±³¾°ÑÕÉ«";
-			this->ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem_Click);
+			this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem->Name = L"è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem";
+			this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem->Text = L"è®¾ç½®èƒŒæ™¯é¢œè‰²";
+			this->è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem_Click);
 			// 
-			// ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem
+			// è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem
 			// 
-			this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem->Name = L"ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem";
-			this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
-			this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem->Text = L"ÉèÖÃ×ø±êÖáÑÕÉ«";
-			this->ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem_Click);
+			this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem->Name = L"è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem";
+			this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem->Text = L"è®¾ç½®åæ ‡è½´é¢œè‰²";
+			this->è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem_Click);
 			// 
-			// ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem
+			// è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem
 			// 
-			this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem->Name = L"ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem";
-			this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
-			this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem->Text = L"ÉèÖÃÇúÏßÑÕÉ«";
-			this->ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem_Click);
+			this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem->Name = L"è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem";
+			this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem->Text = L"è®¾ç½®æ›²çº¿é¢œè‰²";
+			this->è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem_Click);
 			// 
-			// ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem
+			// è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem
 			// 
-			this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem->Name = L"ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem";
-			this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
-			this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem->Text = L"ÉèÖÃ×ÖÌåÑÕÉ«";
-			this->ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem_Click);
+			this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem->Name = L"è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem";
+			this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem->Text = L"è®¾ç½®å­—ä½“é¢œè‰²";
+			this->è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem_Click);
 			// 
-			// ÇúÏß¿í¶ÈToolStripMenuItem
+			// æ›²çº¿å®½åº¦ToolStripMenuItem
 			// 
-			this->ÇúÏß¿í¶ÈToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->æ›²çº¿å®½åº¦ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->toolStripMenuItem2,
 					this->toolStripMenuItem3, this->toolStripMenuItem4, this->toolStripMenuItem5, this->toolStripMenuItem6
 			});
-			this->ÇúÏß¿í¶ÈToolStripMenuItem->Name = L"ÇúÏß¿í¶ÈToolStripMenuItem";
-			this->ÇúÏß¿í¶ÈToolStripMenuItem->Size = System::Drawing::Size(180, 24);
-			this->ÇúÏß¿í¶ÈToolStripMenuItem->Text = L"ÇúÏß¿í¶È";
+			this->æ›²çº¿å®½åº¦ToolStripMenuItem->Name = L"æ›²çº¿å®½åº¦ToolStripMenuItem";
+			this->æ›²çº¿å®½åº¦ToolStripMenuItem->Size = System::Drawing::Size(180, 24);
+			this->æ›²çº¿å®½åº¦ToolStripMenuItem->Text = L"æ›²çº¿å®½åº¦";
 			// 
 			// toolStripMenuItem2
 			// 
@@ -213,6 +250,133 @@ namespace FunctionViewer {
 			this->toolStripMenuItem6->Text = L"5";
 			this->toolStripMenuItem6->Click += gcnew System::EventHandler(this, &MainUI::toolStripMenuItem6_Click);
 			// 
+			// å¿«é€Ÿå¡«å……ToolStripMenuItem
+			// 
+			this->å¿«é€Ÿå¡«å……ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {
+				this->yxToolStripMenuItem,
+					this->yx2ToolStripMenuItem, this->ysinxToolStripMenuItem, this->ycosxToolStripMenuItem, this->ylnxToolStripMenuItem, this->toolStripMenuItem7,
+					this->ÏlnÎ¸ToolStripMenuItem, this->Ï2ToolStripMenuItem, this->ÏcosÎ¸ToolStripMenuItem, this->Ïcos2Î¸ToolStripMenuItem, this->Ï21cosÎ¸ToolStripMenuItem,
+					this->Ïe2Î¸ToolStripMenuItem, this->Ï2sin3Î¸ToolStripMenuItem
+			});
+			this->å¿«é€Ÿå¡«å……ToolStripMenuItem->Name = L"å¿«é€Ÿå¡«å……ToolStripMenuItem";
+			this->å¿«é€Ÿå¡«å……ToolStripMenuItem->Size = System::Drawing::Size(77, 24);
+			this->å¿«é€Ÿå¡«å……ToolStripMenuItem->Text = L"å¿«é€Ÿå¡«å……";
+			// 
+			// yxToolStripMenuItem
+			// 
+			this->yxToolStripMenuItem->Name = L"yxToolStripMenuItem";
+			this->yxToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->yxToolStripMenuItem->Text = L"y=x [æ­£æ¯”ä¾‹å‡½æ•°]";
+			this->yxToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::yxToolStripMenuItem_Click);
+			// 
+			// yx2ToolStripMenuItem
+			// 
+			this->yx2ToolStripMenuItem->Name = L"yx2ToolStripMenuItem";
+			this->yx2ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->yx2ToolStripMenuItem->Text = L"y=xÂ² [äºŒæ¬¡å‡½æ•°]";
+			this->yx2ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::yx2ToolStripMenuItem_Click);
+			// 
+			// ysinxToolStripMenuItem
+			// 
+			this->ysinxToolStripMenuItem->Name = L"ysinxToolStripMenuItem";
+			this->ysinxToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->ysinxToolStripMenuItem->Text = L"y=sin(x) [ä¸‰è§’å‡½æ•°]";
+			this->ysinxToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ysinxToolStripMenuItem_Click);
+			// 
+			// ycosxToolStripMenuItem
+			// 
+			this->ycosxToolStripMenuItem->Name = L"ycosxToolStripMenuItem";
+			this->ycosxToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->ycosxToolStripMenuItem->Text = L"y=cos(x) [ä¸‰è§’å‡½æ•°]";
+			this->ycosxToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ycosxToolStripMenuItem_Click);
+			// 
+			// ylnxToolStripMenuItem
+			// 
+			this->ylnxToolStripMenuItem->Name = L"ylnxToolStripMenuItem";
+			this->ylnxToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->ylnxToolStripMenuItem->Text = L"y=ln(x) [å¯¹æ•°å‡½æ•°]";
+			this->ylnxToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ylnxToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem7
+			// 
+			this->toolStripMenuItem7->Enabled = false;
+			this->toolStripMenuItem7->Name = L"toolStripMenuItem7";
+			this->toolStripMenuItem7->Size = System::Drawing::Size(251, 24);
+			this->toolStripMenuItem7->Text = L"--------------------";
+			// 
+			// ÏlnÎ¸ToolStripMenuItem
+			// 
+			this->ÏlnÎ¸ToolStripMenuItem->Name = L"ÏlnÎ¸ToolStripMenuItem";
+			this->ÏlnÎ¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->ÏlnÎ¸ToolStripMenuItem->Text = L"Ï=ln(Î¸) [e]";
+			this->ÏlnÎ¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÏlnÎ¸ToolStripMenuItem_Click);
+			// 
+			// Ï2ToolStripMenuItem
+			// 
+			this->Ï2ToolStripMenuItem->Name = L"Ï2ToolStripMenuItem";
+			this->Ï2ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->Ï2ToolStripMenuItem->Text = L"Ï=2 [åœ†]";
+			this->Ï2ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::Ï2ToolStripMenuItem_Click);
+			// 
+			// ÏcosÎ¸ToolStripMenuItem
+			// 
+			this->ÏcosÎ¸ToolStripMenuItem->Name = L"ÏcosÎ¸ToolStripMenuItem";
+			this->ÏcosÎ¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->ÏcosÎ¸ToolStripMenuItem->Text = L"Ï=cos(Î¸) [åœ†]";
+			this->ÏcosÎ¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::ÏcosÎ¸ToolStripMenuItem_Click);
+			// 
+			// Ïcos2Î¸ToolStripMenuItem
+			// 
+			this->Ïcos2Î¸ToolStripMenuItem->Name = L"Ïcos2Î¸ToolStripMenuItem";
+			this->Ïcos2Î¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->Ïcos2Î¸ToolStripMenuItem->Text = L"Ï=cos(2*Î¸) [å››å¶çº¿]";
+			this->Ïcos2Î¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::Ïcos2Î¸ToolStripMenuItem_Click);
+			// 
+			// Ï21cosÎ¸ToolStripMenuItem
+			// 
+			this->Ï21cosÎ¸ToolStripMenuItem->Name = L"Ï21cosÎ¸ToolStripMenuItem";
+			this->Ï21cosÎ¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->Ï21cosÎ¸ToolStripMenuItem->Text = L"Ï=2*(1-cos(Î¸)) [å¿ƒå½¢çº¿]";
+			this->Ï21cosÎ¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::Ï21cosÎ¸ToolStripMenuItem_Click);
+			// 
+			// Ïe2Î¸ToolStripMenuItem
+			// 
+			this->Ïe2Î¸ToolStripMenuItem->Name = L"Ïe2Î¸ToolStripMenuItem";
+			this->Ïe2Î¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->Ïe2Î¸ToolStripMenuItem->Text = L"Ï=e^(0.1*Î¸) [å¯¹æ•°èºæ—‹]";
+			this->Ïe2Î¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::Ïe2Î¸ToolStripMenuItem_Click);
+			// 
+			// Ï2sin3Î¸ToolStripMenuItem
+			// 
+			this->Ï2sin3Î¸ToolStripMenuItem->Name = L"Ï2sin3Î¸ToolStripMenuItem";
+			this->Ï2sin3Î¸ToolStripMenuItem->Size = System::Drawing::Size(251, 24);
+			this->Ï2sin3Î¸ToolStripMenuItem->Text = L"Ï=2*sin(3*Î¸) [ä¸‰å¶ç«ç‘°çº¿]";
+			this->Ï2sin3Î¸ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::Ï2sin3Î¸ToolStripMenuItem_Click);
+			// 
+			// å¸®åŠ©ToolStripMenuItem
+			// 
+			this->å¸®åŠ©ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem,
+					this->å…³äºToolStripMenuItem
+			});
+			this->å¸®åŠ©ToolStripMenuItem->Name = L"å¸®åŠ©ToolStripMenuItem";
+			this->å¸®åŠ©ToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->å¸®åŠ©ToolStripMenuItem->Text = L"å¸®åŠ©";
+			// 
+			// æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem
+			// 
+			this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem->Name = L"æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem";
+			this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem->Size = System::Drawing::Size(202, 24);
+			this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem->Text = L"æ˜¾ç¤ºå¸®åŠ©";
+			this->æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem_Click);
+			// 
+			// å…³äºToolStripMenuItem
+			// 
+			this->å…³äºToolStripMenuItem->Name = L"å…³äºToolStripMenuItem";
+			this->å…³äºToolStripMenuItem->Size = System::Drawing::Size(202, 24);
+			this->å…³äºToolStripMenuItem->Text = L"å…³äº";
+			this->å…³äºToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainUI::å…³äºToolStripMenuItem_Click);
+			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Location = System::Drawing::Point(0, 31);
@@ -234,7 +398,7 @@ namespace FunctionViewer {
 			this->radioButton1->TabIndex = 2;
 			this->radioButton1->TabStop = true;
 			this->radioButton1->Tag = L"CoordinateType";
-			this->radioButton1->Text = L"Ö±½Ç×ø±êÏµ";
+			this->radioButton1->Text = L"ç›´è§’åæ ‡ç³»";
 			this->radioButton1->UseVisualStyleBackColor = true;
 			this->radioButton1->CheckedChanged += gcnew System::EventHandler(this, &MainUI::radioButton1_CheckedChanged);
 			// 
@@ -246,7 +410,7 @@ namespace FunctionViewer {
 			this->radioButton2->Size = System::Drawing::Size(81, 18);
 			this->radioButton2->TabIndex = 3;
 			this->radioButton2->Tag = L"CoordinateType";
-			this->radioButton2->Text = L"¼«×ø±êÏµ";
+			this->radioButton2->Text = L"æåæ ‡ç³»";
 			this->radioButton2->UseVisualStyleBackColor = true;
 			this->radioButton2->CheckedChanged += gcnew System::EventHandler(this, &MainUI::radioButton2_CheckedChanged);
 			// 
@@ -273,7 +437,7 @@ namespace FunctionViewer {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(131, 23);
 			this->button1->TabIndex = 6;
-			this->button1->Text = L"»æÖÆ";
+			this->button1->Text = L"ç»˜åˆ¶";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MainUI::button1_Click);
 			// 
@@ -291,7 +455,7 @@ namespace FunctionViewer {
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MainUI";
-			this->Text = L"FunctionViewer - Ö±½Ç×ø±êÄ£Ê½";
+			this->Text = L"FunctionViewer - ç›´è§’åæ ‡æ¨¡å¼";
 			this->SizeChanged += gcnew System::EventHandler(this, &MainUI::MainUI_SizeChanged);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -302,10 +466,10 @@ namespace FunctionViewer {
 		}
 #pragma endregion
 	private:
-		System::Void ÖØÖÃ½çÃæToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void é‡ç½®ç•Œé¢ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			this->resetUI();
 		}
-		System::Void ÍË³öToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void é€€å‡ºToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			Application::Exit();
 		}
 		bool init = false;
@@ -355,28 +519,28 @@ namespace FunctionViewer {
 			initGraphics(this->info->CType);
 			this->pictureBox1->Refresh();
 		}
-		System::Void ÉèÖÃ±³¾°ÑÕÉ«ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void è®¾ç½®èƒŒæ™¯é¢œè‰²ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->BackgroundColor = cd->Color;
 			this->pictureBox1->Refresh();
 			delete cd;
 		}
-		System::Void ÉèÖÃ×ø±êÖáÑÕÉ«ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void è®¾ç½®åæ ‡è½´é¢œè‰²ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->AxisColor = cd->Color;
 			this->pictureBox1->Refresh();
 			delete cd;
 		}
-		System::Void ÉèÖÃÇúÏßÑÕÉ«ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void è®¾ç½®æ›²çº¿é¢œè‰²ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->LineColor = cd->Color;
 			this->pictureBox1->Refresh();
 			delete cd;
 		}
-		System::Void ÉèÖÃ×ÖÌåÑÕÉ«ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Void è®¾ç½®å­—ä½“é¢œè‰²ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			ColorDialog ^ cd = gcnew ColorDialog();
 			cd->ShowDialog();
 			style->FontColor = cd->Color;
@@ -462,22 +626,27 @@ namespace FunctionViewer {
 		}
 		System::Void radioButton2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			if (this->info->CType != CoordinateType::Polar) {
+				this->textBox1->Text = "";
 				this->initGraphics(CoordinateType::Polar);
 				this->pictureBox1->Refresh();
-				this->label1->Text = "¦Ñ=";
+				this->label1->Text = "Ï=";
 			}
 		}
 
 		System::Void radioButton1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 			if (this->info->CType != CoordinateType::RightAngle) {
+				this->textBox1->Text = "";
 				this->initGraphics(CoordinateType::RightAngle);
 				this->pictureBox1->Refresh();
 				this->label1->Text = "y=";
 			}
 		}
 		System::Void textBox1_Leave(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = this->textBox1->Text->Replace("ee", "&");
+			this->textBox1->Text = this->textBox1->Text->Replace("e", "ee");
+			this->textBox1->Text = this->textBox1->Text->Replace("&", "ee");
 			if (this->info->CType == CoordinateType::Polar) {
-				this->textBox1->Text = this->textBox1->Text->Replace("x", "¦È");
+				this->textBox1->Text = this->textBox1->Text->Replace("x", "Î¸");
 			}
 		}
 		Point ^LastPoint;
@@ -485,10 +654,10 @@ namespace FunctionViewer {
 		ViewInfo ^info = nullptr;
 
 		void resetUI() {
+			this->textBox1->Text = "";
+			this->style = gcnew Style();
 			style = gcnew Style();
-			Point ^center = getCenter();
-			info = gcnew ViewInfo(gcnew FPoint(-center->X / 50, center->Y / 50), CoordinateType::RightAngle);
-			//TODO
+			initGraphics();
 		}
 
 		void initGraphics() {
@@ -499,13 +668,14 @@ namespace FunctionViewer {
 			info = gcnew ViewInfo(gcnew FPoint(-center->X / 50, center->Y / 50), t);
 			switch (t) {
 			case CoordinateType::Polar:
-				this->Text = L"FunctionViewer - ¼«×ø±êÄ£Ê½";
+				this->Text = L"FunctionViewer - æåæ ‡æ¨¡å¼";
 				break;
 			case CoordinateType::RightAngle:
-				this->Text = L"FunctionViewer - Ö±½Ç×ø±êÄ£Ê½";
+				this->Text = L"FunctionViewer - ç›´è§’åæ ‡æ¨¡å¼";
 				break;
 			}
 			this->pictureBox1->Visible = true;
+			this->pictureBox1->Refresh();
 		}
 
 		void drawGraphics(Graphics ^g) {
@@ -528,7 +698,7 @@ namespace FunctionViewer {
 			try {
 				func->drawPoint(g, gcnew Point(0, 0), gcnew Point(this->pictureBox1->Width, 0), this->info, p);
 			} catch (Exception ^e) {
-				MessageBox::Show("´íÎó ±í´ïÊ½Òì³£");
+				MessageBox::Show("é”™è¯¯ è¡¨è¾¾å¼å¼‚å¸¸");
 			}
 		}
 
@@ -540,7 +710,7 @@ namespace FunctionViewer {
 			SolidBrush ^arrbsh = gcnew SolidBrush(this->style->AxisColor);
 			Point ^center = this->info->toPoint(gcnew FPoint(0, 0));
 			SolidBrush ^fontbsh = gcnew SolidBrush(this->style->FontColor);
-			Drawing::Font ^font = gcnew Drawing::Font("Á¥Êé", 12);
+			Drawing::Font ^font = gcnew Drawing::Font("éš¶ä¹¦", 12);
 			if (info->CType == CoordinateType::Polar) {
 				g->DrawArc(p, Rectangle(center->X, center->Y - 1, 3, 3), 0, 360);
 				g->DrawLine(p, center->X, center->Y, pbox->Width, center->Y);
@@ -550,7 +720,7 @@ namespace FunctionViewer {
 				}
 
 
-				//»æÖÆ¿Ì¶È
+				//ç»˜åˆ¶åˆ»åº¦
 				int interval = (0.5 / zoom) * 2;
 				if (interval < 1) {
 					interval = 1;
@@ -572,15 +742,15 @@ namespace FunctionViewer {
 
 
 			//if (info->Location->Location_Y * (info->Location->Location_Y - displayH) < 0) {
-				//XÖá
+				//Xè½´
 			g->DrawLine(p, 0, center->Y, this->pictureBox1->Width, center->Y);
 			g->FillClosedCurve(arrbsh, getArrowPoint_Right(Point(this->pictureBox1->Width, center->Y)));
-			g->DrawString("x", gcnew Drawing::Font("Á¥Êé", 12), fontbsh, Point(this->pictureBox1->Width - 15, center->Y + 18));
+			g->DrawString("x", gcnew Drawing::Font("éš¶ä¹¦", 12), fontbsh, Point(this->pictureBox1->Width - 15, center->Y + 18));
 			//}
 
 			float displayW = pbox->Width / (zoom * 50);
 			//if (info->Location->Location_X * (info->Location->Location_X + displayW) < 0) {
-				//YÖá
+				//Yè½´
 			g->DrawLine(p, center->X, 0, center->X, this->pictureBox1->Height);
 			g->FillClosedCurve(arrbsh, getArrowPoint_Top(Point(center->X, 0)));
 			int nw = 10;
@@ -591,11 +761,11 @@ namespace FunctionViewer {
 			if (LU->Location_Y < 0) {
 				nw += 15;
 			}
-			g->DrawString("y", gcnew Drawing::Font("Á¥Êé", 12), fontbsh, Point(center->X - 20 - nw, 5));
+			g->DrawString("y", gcnew Drawing::Font("éš¶ä¹¦", 12), fontbsh, Point(center->X - 20 - nw, 5));
 			//}
-			//»æÖÆÔ­µã
-			g->DrawString("0", gcnew Drawing::Font("Á¥Êé", 15), fontbsh, Point(center->X - 18, center->Y + 4));
-			//»æÖÆ¿Ì¶È
+			//ç»˜åˆ¶åŸç‚¹
+			g->DrawString("0", gcnew Drawing::Font("éš¶ä¹¦", 15), fontbsh, Point(center->X - 18, center->Y + 4));
+			//ç»˜åˆ¶åˆ»åº¦
 			int interval = (0.5 / zoom) * 2;
 			if (interval < 1) {
 				interval = 1;
@@ -653,11 +823,67 @@ namespace FunctionViewer {
 			return arr;
 		}
 
-		//·µ»Ø»æÍ¼ÖĞĞÄ (UI×ø±êÏµ)
+		//è¿”å›ç»˜å›¾ä¸­å¿ƒ (UIåæ ‡ç³»)
 		Point ^ getCenter() {
 			auto p = this->pictureBox1;
 			return gcnew Point(p->Width / 2, p->Height / 2);
 		}
-	
+
+		System::Void yxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"x";
+			this->initGraphics(CoordinateType::RightAngle);
+		}
+		System::Void yx2ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"x^2";
+			this->initGraphics(CoordinateType::RightAngle);
+		}
+		System::Void ysinxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"sin(x)";
+			this->initGraphics(CoordinateType::RightAngle);
+		}
+		System::Void ycosxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"cos(x)";
+			this->initGraphics(CoordinateType::RightAngle);
+		}
+		System::Void ylnxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"ln(x)";
+			this->initGraphics(CoordinateType::RightAngle);
+		}
+		System::Void ÏlnÎ¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"ln(Î¸)";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void Ï2ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"2";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void ÏcosÎ¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"cos(Î¸)";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void Ïcos2Î¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"cos(2*Î¸)";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void Ï21cosÎ¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"2 * (1 - cos(Î¸))";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void Ïe2Î¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"ee^(0.1*Î¸)";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void Ï2sin3Î¸ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->textBox1->Text = L"2*sin(3*Î¸)";
+			this->initGraphics(CoordinateType::Polar);
+		}
+		System::Void å…³äºToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			About ^a = gcnew About();
+			a->Visible = true;
+		}
+		System::Void æ˜¾ç¤ºå¸®åŠ©ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			FVHelp ^h = gcnew FVHelp();
+			h->Visible = true;
+		}
 };
 }
