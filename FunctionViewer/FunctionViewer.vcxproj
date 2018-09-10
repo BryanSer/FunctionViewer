@@ -131,7 +131,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="About.cpp" />
     <ClCompile Include="MainUI.cpp" />
   </ItemGroup>
   <ItemGroup>
