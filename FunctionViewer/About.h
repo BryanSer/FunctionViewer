@@ -154,8 +154,8 @@ namespace FunctionViewer {
 			this->Visible = false;
 			this->RemoveOwnedForm(this);
 		}
-	System::Void linkLabel1_Click(System::Object^  sender, System::EventArgs^  e) {
-		System::Diagnostics::Process::Start("https://github.com/BryanSer/FunctionViewer");
-	}
-};
+		System::Void linkLabel1_Click(System::Object^  sender, System::EventArgs^  e) {
+			System::Diagnostics::Process::Start("https://github.com/BryanSer/FunctionViewer");
+		}
+	};
 }
