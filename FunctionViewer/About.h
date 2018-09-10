@@ -120,13 +120,14 @@ namespace FunctionViewer {
 			// linkLabel1
 			// 
 			this->linkLabel1->AutoSize = true;
-			this->linkLabel1->Location = System::Drawing::Point(119, 155);
+			this->linkLabel1->Location = System::Drawing::Point(106, 155);
 			this->linkLabel1->Name = L"linkLabel1";
 			this->linkLabel1->Size = System::Drawing::Size(301, 14);
 			this->linkLabel1->TabIndex = 6;
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"https://github.com/BryanSer/FunctionViewer";
 			this->linkLabel1->UseWaitCursor = true;
+			this->linkLabel1->Click += gcnew System::EventHandler(this, &About::linkLabel1_Click);
 			// 
 			// About
 			// 
@@ -153,5 +154,8 @@ namespace FunctionViewer {
 			this->Visible = false;
 			this->RemoveOwnedForm(this);
 		}
-	};
+	System::Void linkLabel1_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Diagnostics::Process::Start("https://github.com/BryanSer/FunctionViewer");
+	}
+};
 }
