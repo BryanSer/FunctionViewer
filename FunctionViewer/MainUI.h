@@ -830,50 +830,74 @@ namespace FunctionViewer {
 		}
 
 		System::Void yxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
 			this->textBox1->Text = L"x";
 			this->initGraphics(CoordinateType::RightAngle);
 		}
 		System::Void yx2ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
 			this->textBox1->Text = L"x^2";
 			this->initGraphics(CoordinateType::RightAngle);
 		}
 		System::Void ysinxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
 			this->textBox1->Text = L"sin(x)";
 			this->initGraphics(CoordinateType::RightAngle);
 		}
 		System::Void ycosxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
 			this->textBox1->Text = L"cos(x)";
 			this->initGraphics(CoordinateType::RightAngle);
 		}
 		System::Void ylnxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
 			this->textBox1->Text = L"ln(x)";
 			this->initGraphics(CoordinateType::RightAngle);
 		}
 		System::Void ρlnθToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"ln(θ)";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρ2ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"2";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρcosθToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"cos(θ)";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρcos2θToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"cos(2*θ)";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρ21cosθToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"2 * (1 - cos(θ))";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρe2θToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"ee^(0.1*θ)";
 			this->initGraphics(CoordinateType::Polar);
 		}
 		System::Void ρ2sin3θToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->radioButton1->Checked = false;
+			this->radioButton2->Checked = true;
 			this->textBox1->Text = L"2*sin(3*θ)";
 			this->initGraphics(CoordinateType::Polar);
 		}
